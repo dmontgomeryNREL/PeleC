@@ -210,6 +210,19 @@ eb_isothermal                bool         true
 # flag for no slip EB boundary
 eb_noslip                    bool         true
 
+# flag for variable EB boundary temperature for isothermal walls
+eb_variable_boundary_T       bool         false
+
+# set the initial EB boundary temperature for isothermal walls
+eb_boundary_T0               Real         1.0
+
+# set the final EB boundary temperature for isothermal walls
+eb_boundary_TF               Real         1.0
+
+# set the ramp time for time from eb_boundary_T0 to eb_boundary_TF
+eb_boundary_TR               Real         1.0
+
+
 # redistribution type in amrex-hydro
 redistribution_type          string       "StateRedist"
 

@@ -5,7 +5,7 @@ void
 PeleC::getMOLSrcTerm(
   const amrex::MultiFab& S,
   amrex::MultiFab& MOLSrcTerm,
-  const amrex::Real /*time*/,
+  const amrex::Real time,
   const amrex::Real dt,
   const amrex::Real reflux_factor)
 {
@@ -412,6 +412,18 @@ PeleC::getMOLSrcTerm(
 
           if (eb_isothermal && (diffuse_temp || diffuse_enth)) {
             {
+              if (eb_variable_boundary_T){
+                amrex::Real eb_Temp = eb_boundary_T;
+                if(eb_boundary_TF > eb_boundary_T0){
+                  eb_Temp = std::min(eb_boundary_TF, eb_boundary_T0 
+                     + (eb_boundary_TF - eb_boundary_T0)/eb_boundary_TR * time);
+                }
+                else{
+                  eb_Temp = std::max(eb_boundary_TF, eb_boundary_T0 
+                     + (eb_boundary_TF - eb_boundary_T0)/eb_boundary_TR * time);
+                }
+                sv_eb_bcval[local_i].setVal(eb_Temp, QTEMP);
+              }
               BL_PROFILE("PeleC::pc_apply_eb_boundry_flux_stencil()");
               pc_apply_eb_boundry_flux_stencil(
                 ebfluxbox, sv_eb_bndry_grad_stencil[local_i].data(), Ncut, qar,
