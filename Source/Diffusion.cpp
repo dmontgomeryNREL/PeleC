@@ -412,6 +412,9 @@ PeleC::getMOLSrcTerm(
 
           if (eb_isothermal && (diffuse_temp || diffuse_enth)) {
             {
+              BL_PROFILE("PeleC::pc_apply_eb_boundry_flux_stencil()");
+              
+              // Change the temperature
               if (eb_variable_boundary_T){
                 amrex::Real eb_Temp = eb_boundary_T;
                 if(eb_boundary_TF > eb_boundary_T0){
@@ -424,7 +427,7 @@ PeleC::getMOLSrcTerm(
                 }
                 sv_eb_bcval[local_i].setVal(eb_Temp, QTEMP);
               }
-              BL_PROFILE("PeleC::pc_apply_eb_boundry_flux_stencil()");
+              
               pc_apply_eb_boundry_flux_stencil(
                 ebfluxbox, sv_eb_bndry_grad_stencil[local_i].data(), Ncut, qar,
                 QTEMP, coe_cc, dComp_lambda,

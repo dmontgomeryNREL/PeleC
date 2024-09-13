@@ -159,6 +159,9 @@ PeleC::initialize_eb2_structs()
 
       if (eb_isothermal && (diffuse_temp || diffuse_enth)) {
         sv_eb_bcval[iLocal].setVal(eb_boundary_T, QTEMP);
+        if (eb_variable_boundary_T){
+          sv_eb_bcval[iLocal].setVal(eb_boundary_T0, QTEMP);
+        }
       }
       if (eb_noslip && diffuse_vel) {
         sv_eb_bcval[iLocal].setVal(0, QU, AMREX_SPACEDIM);

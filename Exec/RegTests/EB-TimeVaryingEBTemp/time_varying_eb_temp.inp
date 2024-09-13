@@ -1,6 +1,6 @@
 # ------------------  INPUTS TO MAIN PROGRAM  -------------------
 #max_step = 1
-stop_time = 0.1
+stop_time = 0.01
 
 # PROBLEM SIZE & GEOMETRY
 geometry.is_periodic =  0  0  0
@@ -48,7 +48,7 @@ pelec.v              = 1       # verbosity in PeleC cpp files
 amr.v                = 1       # verbosity in Amr.cpp
 
 # REFINEMENT / REGRIDDING
-amr.max_level       = 1       # maximum level number allowed
+amr.max_level       = 0       # maximum level number allowed
 amr.ref_ratio       = 2 2 2 2 # refinement ratio
 amr.regrid_int      = 5       # how often to regrid
 amr.blocking_factor = 16       # block factor in grid generation
@@ -75,9 +75,9 @@ eb2.sphere_radius = 0.25
 eb2.sphere_center = 0.75 0.5 0
 eb2.sphere_has_fluid_inside = 0
 eb2.small_volfrac = 1.0e-4
-pelec.eb_boundary_T = 100.
+pelec.eb_boundary_T = 300.
 pelec.eb_variable_boundary_T = 1
 pelec.eb_boundary_T0 = 300.
 pelec.eb_boundary_TF = 155.
-pelec.eb_boundary_TR = 0.1
+pelec.eb_boundary_TR = 0.01
 pelec.eb_isothermal = 1
