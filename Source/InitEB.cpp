@@ -158,7 +158,13 @@ PeleC::initialize_eb2_structs()
       sv_eb_bcval[iLocal].define(sv_eb_bndry_grad_stencil[iLocal], QVAR);
 
       if (eb_isothermal && (diffuse_temp || diffuse_enth)) {
-        sv_eb_bcval[iLocal].setVal(eb_boundary_T, QTEMP);
+        // Want to set this with a user defined function
+        // Note sv_eb_bcval is an amrex::Vector<SparseData<amrex::Real, EBBndrySten>>
+        // ProblemSpecificFunctions::set_isothermal_eb_temp();
+        // sv_eb_bcval[iLocal].setVal(eb_boundary_T, QTEMP);
+        amrex::Real time = (amr_level[0]->get_state_data(State_Type)).curTime();
+        ProblemSpecificFunctions::set_isothermal_eb_temp(
+                                   iLocal,time,sv_eb_bcval,geomdata,prob_parm);
       }
       if (eb_noslip && diffuse_vel) {
 

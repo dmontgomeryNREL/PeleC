@@ -425,6 +425,12 @@ PeleC::getMOLSrcTerm(
 
           if (eb_isothermal && (diffuse_temp || diffuse_enth)) {
             {
+              // Set the EB temperature
+              // requires sv_eb_bcval[local_i].setVal(eb_Temp,QTEMP)
+              ProblemSpecificFunctions::set_isothermal_eb_temp(
+                
+              );
+
               BL_PROFILE("PeleC::pc_apply_eb_boundry_flux_stencil()");
               pc_apply_eb_boundry_flux_stencil(
                 ebfluxbox, sv_eb_bndry_grad_stencil[local_i].data(), Ncut, qar,

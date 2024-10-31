@@ -121,6 +121,20 @@ struct DefaultProblemSpecificFunctions
     return false;
   }
 
+  AMREX_GPU_DEVICE
+  AMREX_FORCE_INLINE
+  static void set_isothermal_eb_temp(
+    int local_i,
+    amrex::Real /*time*/,
+    amrex::Vector<SparseData<amrex::Real, EBBndrySten>> a_sv_eb_bcval,
+    amrex::GeometryData const& /*geomdata*/,
+    ProbParmDevice const& /*prob_parm*/)
+  {
+    // Default eb_boundary_T = 1.0, parsed in pelec_queries.H
+    a_sv_eb_bcval[local_i].setVal(eb_boundary_T, QTEMP);
+  }
+  
+
   static void problem_modify_ext_sources(
     amrex::Real /*time*/,
     amrex::Real /*dt*/,
