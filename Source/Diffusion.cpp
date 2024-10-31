@@ -427,9 +427,7 @@ PeleC::getMOLSrcTerm(
             {
               // Set the EB temperature
               // requires sv_eb_bcval[local_i].setVal(eb_Temp,QTEMP)
-              ProblemSpecificFunctions::set_isothermal_eb_temp(
-                
-              );
+              //ProblemSpecificFunctions::set_isothermal_eb_temp();
 
               BL_PROFILE("PeleC::pc_apply_eb_boundry_flux_stencil()");
               pc_apply_eb_boundry_flux_stencil(
